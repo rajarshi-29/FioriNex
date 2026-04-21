@@ -1,0 +1,54 @@
+<mvc:View
+  controllerName="fiori.p2p.controller.POList"
+  xmlns:mvc="sap.ui.core.mvc"
+  xmlns="sap.m">
+
+  <Page title="Manage Purchase Orders" showNavButton="true" navButtonPress="onNavBack">
+
+    <content>
+      <Table id="poTable" items="{p2p>/PurchaseOrders}" noDataText="No purchase orders found.">
+        <headerToolbar>
+          <Toolbar>
+            <Title text="Purchase Orders" level="H3" />
+            <ToolbarSpacer />
+            <Button icon="sap-icon://refresh" press="onRefresh" tooltip="Refresh" />
+          </Toolbar>
+        </headerToolbar>
+        <columns>
+          <Column><Text text="PO ID" /></Column>
+          <Column><Text text="PR Reference" /></Column>
+          <Column><Text text="Item" /></Column>
+          <Column><Text text="Vendor" /></Column>
+          <Column><Text text="Qty" /></Column>
+          <Column><Text text="Amount (INR)" /></Column>
+          <Column><Text text="Delivery Date" /></Column>
+          <Column><Text text="Payment Terms" /></Column>
+          <Column><Text text="Status" /></Column>
+        </columns>
+        <items>
+          <ColumnListItem type="Navigation" press="onPOPress">
+            <cells>
+              <ObjectIdentifier title="{p2p>id}" />
+              <Text text="{p2p>prRef}" />
+              <Text text="{p2p>item}" />
+              <Text text="{p2p>vendor}" />
+              <Text text="{p2p>qty} {p2p>unit}" />
+              <ObjectNumber number="{p2p>amount}" unit="INR" />
+              <Text text="{p2p>deliveryDate}" />
+              <Text text="{p2p>paymentTerms}" />
+              <ObjectStatus text="{p2p>status}" state="Information" />
+            </cells>
+          </ColumnListItem>
+        </items>
+      </Table>
+    </content>
+
+    <footer>
+      <Toolbar>
+        <ToolbarSpacer />
+        <Text text="Step 3 of 5: Purchase Order  |  Next: Goods Receipt" />
+        <Button text="Go to GR" icon="sap-icon://warehouse" press="onNavToGR" />
+      </Toolbar>
+    </footer>
+  </Page>
+</mvc:View>

@@ -1,0 +1,77 @@
+{
+  "PurchaseRequisitions": [
+    {
+      "id": "PR-1001", "item": "Office Chairs", "qty": 10, "unit": "EA",
+      "plant": "Plant 1000 – Mumbai", "vendor": "OfficeGoods Co.",
+      "status": "Pending", "date": "2024-04-01", "amount": 25000, "currency": "INR",
+      "requestor": "Rahul Sharma", "department": "Admin"
+    },
+    {
+      "id": "PR-1002", "item": "Laptop Docking Stations", "qty": 5, "unit": "EA",
+      "plant": "Plant 1000 – Mumbai", "vendor": "TechSupply Ltd.",
+      "status": "Approved", "date": "2024-04-03", "amount": 15000, "currency": "INR",
+      "requestor": "Priya Nair", "department": "IT"
+    },
+    {
+      "id": "PR-1003", "item": "Printer Cartridges", "qty": 20, "unit": "EA",
+      "plant": "Plant 2000 – Pune", "vendor": "PrintMart India",
+      "status": "Pending", "date": "2024-04-05", "amount": 4500, "currency": "INR",
+      "requestor": "Amit Verma", "department": "Operations"
+    },
+    {
+      "id": "PR-1004", "item": "Safety Helmets", "qty": 50, "unit": "EA",
+      "plant": "Plant 2000 – Pune", "vendor": "SafeGear Pvt Ltd",
+      "status": "Rejected", "date": "2024-04-06", "amount": 8000, "currency": "INR",
+      "requestor": "Sneha Das", "department": "Warehouse"
+    }
+  ],
+  "PurchaseOrders": [
+    {
+      "id": "PO-4001", "prRef": "PR-1002", "vendor": "TechSupply Ltd.",
+      "item": "Laptop Docking Stations", "qty": 5, "unit": "EA",
+      "amount": 15000, "currency": "INR", "status": "Open",
+      "deliveryDate": "2024-04-20", "plant": "Plant 1000 – Mumbai",
+      "paymentTerms": "Net 30"
+    },
+    {
+      "id": "PO-4002", "prRef": "PR-1003", "vendor": "PrintMart India",
+      "item": "Printer Cartridges", "qty": 20, "unit": "EA",
+      "amount": 4500, "currency": "INR", "status": "Open",
+      "deliveryDate": "2024-04-18", "plant": "Plant 2000 – Pune",
+      "paymentTerms": "Net 15"
+    }
+  ],
+  "GoodsReceipts": [
+    {
+      "id": "GR-5001", "poRef": "PO-4001", "vendor": "TechSupply Ltd.",
+      "item": "Laptop Docking Stations",
+      "qtyOrdered": 5, "qtyReceived": 0,
+      "status": "Pending", "storageLocation": "SL01 – Main Warehouse",
+      "movementType": "101 – GR for PO"
+    },
+    {
+      "id": "GR-5002", "poRef": "PO-4002", "vendor": "PrintMart India",
+      "item": "Printer Cartridges",
+      "qtyOrdered": 20, "qtyReceived": 0,
+      "status": "Pending", "storageLocation": "SL02 – Store Room",
+      "movementType": "101 – GR for PO"
+    }
+  ],
+  "Invoices": [
+    {
+      "id": "INV-6001", "poRef": "PO-4001", "grRef": "GR-5001",
+      "vendor": "TechSupply Ltd.", "item": "Laptop Docking Stations",
+      "amount": 15000, "tax": 2700, "totalAmount": 17700,
+      "currency": "INR", "status": "Pending",
+      "invoiceDate": "2024-04-22", "dueDate": "2024-05-22",
+      "paymentMethod": "Bank Transfer"
+    }
+  ],
+  "ProcessSteps": [
+    { "step": 1, "name": "Purchase Requisition",  "icon": "sap-icon://document",         "route": "prlist",       "status": "active"   },
+    { "step": 2, "name": "PR Approval",            "icon": "sap-icon://approvals",         "route": "approval",     "status": "active"   },
+    { "step": 3, "name": "Purchase Order",         "icon": "sap-icon://order-status",      "route": "polist",       "status": "active"   },
+    { "step": 4, "name": "Goods Receipt",          "icon": "sap-icon://warehouse",         "route": "goodsreceipt", "status": "active"   },
+    { "step": 5, "name": "Invoice Verification",  "icon": "sap-icon://request",           "route": "invoice",      "status": "active"   }
+  ]
+}

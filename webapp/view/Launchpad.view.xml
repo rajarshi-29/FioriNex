@@ -1,0 +1,173 @@
+<mvc:View
+  controllerName="fiori.p2p.controller.Launchpad"
+  xmlns:mvc="sap.ui.core.mvc"
+  xmlns="sap.m"
+  xmlns:tnt="sap.tnt"
+  xmlns:f="sap.f"
+  xmlns:l="sap.ui.layout">
+
+  <Page
+    title="FioriNex Pvt Ltd – Launchpad"
+    backgroundDesign="Solid"
+    showNavButton="false">
+
+    <customHeader>
+      <Bar>
+        <contentLeft>
+          <Title text="&#x25A0; FioriNex Pvt Ltd" titleStyle="H4" />
+        </contentLeft>
+        <contentMiddle>
+          <Title text="SAP Fiori – Procure to Pay" titleStyle="H5" />
+        </contentMiddle>
+        <contentRight>
+          <Avatar initials="FN" displaySize="XS" backgroundColor="Accent6" />
+        </contentRight>
+      </Bar>
+    </customHeader>
+
+    <content>
+      <VBox class="sapUiMediumMarginTop" alignItems="Center">
+
+        <!-- Welcome Banner -->
+        <MessageStrip
+          text="Welcome to the SAP Fiori P2P Prototype. Navigate through the tiles below to simulate the full Procure-to-Pay cycle."
+          type="Information"
+          showIcon="true"
+          class="sapUiMediumMarginBottom sapUiMediumMarginBeginEnd" />
+
+        <!-- Process Flow Indicator -->
+        <Panel headerText="P2P Process Flow" expandable="true" expanded="true"
+               width="95%" class="sapUiSmallMarginBottom">
+          <HBox justifyContent="SpaceAround" wrap="Wrap" class="sapUiSmallMargin">
+            <VBox alignItems="Center" class="sapUiSmallMarginEnd">
+              <Button icon="sap-icon://document"     text="1. PR"      type="Emphasized" press="onNavToPRList"  />
+            </VBox>
+            <Text text="▶" class="sapUiSmallMarginTop" />
+            <VBox alignItems="Center" class="sapUiSmallMarginEnd">
+              <Button icon="sap-icon://approvals"    text="2. Approve" type="Default"    press="onNavToApproval" />
+            </VBox>
+            <Text text="▶" class="sapUiSmallMarginTop" />
+            <VBox alignItems="Center" class="sapUiSmallMarginEnd">
+              <Button icon="sap-icon://cart"         text="3. PO"      type="Default"    press="onNavToPOList"  />
+            </VBox>
+            <Text text="▶" class="sapUiSmallMarginTop" />
+            <VBox alignItems="Center" class="sapUiSmallMarginEnd">
+              <Button icon="sap-icon://warehouse"    text="4. GR"      type="Default"    press="onNavToGR"       />
+            </VBox>
+            <Text text="▶" class="sapUiSmallMarginTop" />
+            <VBox alignItems="Center">
+              <Button icon="sap-icon://request"      text="5. Invoice" type="Default"    press="onNavToInvoice"  />
+            </VBox>
+          </HBox>
+        </Panel>
+
+        <!-- App Tiles -->
+        <Title text="My Apps" titleStyle="H4" class="sapUiSmallMarginBottom" />
+        <l:Grid defaultSpan="XL3 L4 M6 S12" width="95%" hSpacing="1" vSpacing="1"
+                class="sapUiSmallMarginBottom">
+
+          <!-- Tile 1: My Purchase Requisitions -->
+          <GenericTile
+            header="My Purchase Requisitions"
+            subheader="SAP MM – ME51N"
+            press="onNavToPRList"
+            frameType="TwoByOne">
+            <tileContent>
+              <TileContent footer="4 Requisitions Open">
+                <content>
+                  <NumericContent value="4" indicator="Up" valueColor="Critical"
+                                  icon="sap-icon://document" withMargin="false" />
+                </content>
+              </TileContent>
+            </tileContent>
+          </GenericTile>
+
+          <!-- Tile 2: Create Purchase Requisition -->
+          <GenericTile
+            header="Create Requisition"
+            subheader="SAP MM – ME51N"
+            press="onNavToPRCreate"
+            frameType="TwoByOne">
+            <tileContent>
+              <TileContent footer="New Request">
+                <content>
+                  <NumericContent value="+" indicator="None" valueColor="Good"
+                                  icon="sap-icon://add-document" withMargin="false" />
+                </content>
+              </TileContent>
+            </tileContent>
+          </GenericTile>
+
+          <!-- Tile 3: Approve Purchase Orders -->
+          <GenericTile
+            header="Approve Purchase Orders"
+            subheader="SAP MM – ME28"
+            press="onNavToApproval"
+            frameType="TwoByOne">
+            <tileContent>
+              <TileContent footer="2 Pending Approval">
+                <content>
+                  <NumericContent value="2" indicator="None" valueColor="Critical"
+                                  icon="sap-icon://approvals" withMargin="false" />
+                </content>
+              </TileContent>
+            </tileContent>
+          </GenericTile>
+
+          <!-- Tile 4: Manage Purchase Orders -->
+          <GenericTile
+            header="Manage Purchase Orders"
+            subheader="SAP MM – ME2N"
+            press="onNavToPOList"
+            frameType="TwoByOne">
+            <tileContent>
+              <TileContent footer="2 Open Orders">
+                <content>
+                  <NumericContent value="2" indicator="None" valueColor="Neutral"
+                                  icon="sap-icon://cart" withMargin="false" />
+                </content>
+              </TileContent>
+            </tileContent>
+          </GenericTile>
+
+          <!-- Tile 5: Post Goods Receipt -->
+          <GenericTile
+            header="Post Goods Receipt"
+            subheader="SAP MM – MIGO"
+            press="onNavToGR"
+            frameType="TwoByOne">
+            <tileContent>
+              <TileContent footer="2 GRs Pending">
+                <content>
+                  <NumericContent value="2" indicator="None" valueColor="Critical"
+                                  icon="sap-icon://warehouse" withMargin="false" />
+                </content>
+              </TileContent>
+            </tileContent>
+          </GenericTile>
+
+          <!-- Tile 6: Verify Supplier Invoice -->
+          <GenericTile
+            header="Verify Supplier Invoice"
+            subheader="SAP MM – MIRO"
+            press="onNavToInvoice"
+            frameType="TwoByOne">
+            <tileContent>
+              <TileContent footer="1 Invoice Pending">
+                <content>
+                  <NumericContent value="1" indicator="None" valueColor="Critical"
+                                  icon="sap-icon://request" withMargin="false" />
+                </content>
+              </TileContent>
+            </tileContent>
+          </GenericTile>
+
+        </l:Grid>
+
+        <!-- Footer Info -->
+        <Text text="FioriNex Pvt Ltd | SAP Fiori P2P Prototype | KIIT University"
+              class="sapUiSmallMarginTop sapUiSmallMarginBottom" />
+      </VBox>
+    </content>
+  </Page>
+</mvc:View>

@@ -1,0 +1,74 @@
+<mvc:View
+  controllerName="fiori.p2p.controller.PRList"
+  xmlns:mvc="sap.ui.core.mvc"
+  xmlns="sap.m"
+  xmlns:core="sap.ui.core">
+
+  <Page title="My Purchase Requisitions" showNavButton="true" navButtonPress="onNavBack">
+
+    <subHeader>
+      <Toolbar>
+        <SearchField placeholder="Search by item or PR ID..." width="40%" liveChange="onSearch" />
+        <ToolbarSpacer />
+        <Select change="onFilterStatus">
+          <core:Item key="All"      text="All Status" />
+          <core:Item key="Pending"  text="Pending" />
+          <core:Item key="Approved" text="Approved" />
+          <core:Item key="Rejected" text="Rejected" />
+        </Select>
+        <Button icon="sap-icon://add" text="New PR" type="Emphasized" press="onCreatePR" />
+      </Toolbar>
+    </subHeader>
+
+    <content>
+      <Table id="prTable" items="{p2p>/PurchaseRequisitions}"
+             noDataText="No requisitions found."
+             growing="true" growingThreshold="10">
+        <headerToolbar>
+          <Toolbar>
+            <Title text="Purchase Requisitions" level="H3" />
+            <ToolbarSpacer />
+            <Text text="{= ${p2p>/PurchaseRequisitions}.length + ' records'}" />
+          </Toolbar>
+        </headerToolbar>
+        <columns>
+          <Column><Text text="PR ID" /></Column>
+          <Column><Text text="Item Description" /></Column>
+          <Column><Text text="Qty / Unit" /></Column>
+          <Column><Text text="Plant" /></Column>
+          <Column><Text text="Vendor" /></Column>
+          <Column><Text text="Amount (INR)" /></Column>
+          <Column><Text text="Date" /></Column>
+          <Column><Text text="Requestor" /></Column>
+          <Column><Text text="Status" /></Column>
+        </columns>
+        <items>
+          <ColumnListItem type="Navigation" press="onPRItemPress">
+            <cells>
+              <ObjectIdentifier title="{p2p>id}" />
+              <Text text="{p2p>item}" />
+              <Text text="{p2p>qty} {p2p>unit}" />
+              <Text text="{p2p>plant}" />
+              <Text text="{p2p>vendor}" />
+              <ObjectNumber number="{p2p>amount}" unit="INR" />
+              <Text text="{p2p>date}" />
+              <Text text="{p2p>requestor}" />
+              <ObjectStatus
+                text="{p2p>status}"
+                state="{= ${p2p>status} === 'Approved' ? 'Success' :
+                          ${p2p>status} === 'Rejected' ? 'Error' : 'Warning' }" />
+            </cells>
+          </ColumnListItem>
+        </items>
+      </Table>
+    </content>
+
+    <footer>
+      <Toolbar>
+        <ToolbarSpacer />
+        <Text text="Step 1 of 5: Purchase Requisition  |  Next: PR Approval" />
+        <Button text="Go to Approval" icon="sap-icon://approvals" press="onNavToApproval" />
+      </Toolbar>
+    </footer>
+  </Page>
+</mvc:View>

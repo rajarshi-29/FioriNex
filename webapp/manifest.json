@@ -1,0 +1,59 @@
+{
+  "_version": "1.58.0",
+  "sap.app": {
+    "id": "fiori.p2p",
+    "type": "application",
+    "title": "Procure-to-Pay | FioriNex Pvt Ltd",
+    "description": "SAP Fiori-based P2P prototype simulating PR, PO, GR and Invoice workflows",
+    "applicationVersion": { "version": "1.0.0" }
+  },
+  "sap.ui": {
+    "technology": "UI5",
+    "deviceTypes": { "desktop": true, "tablet": true, "phone": true }
+  },
+  "sap.ui5": {
+    "rootView": {
+      "viewName": "fiori.p2p.view.App",
+      "type": "XML",
+      "id": "appView"
+    },
+    "dependencies": {
+      "minUI5Version": "1.108.0",
+      "libs": { "sap.m": {}, "sap.ui.layout": {}, "sap.f": {} }
+    },
+    "models": {
+      "p2p": {
+        "type": "sap.ui.model.json.JSONModel",
+        "uri": "model/mockdata.json"
+      }
+    },
+    "routing": {
+      "config": {
+        "routerClass": "sap.m.routing.Router",
+        "viewType": "XML",
+        "viewPath": "fiori.p2p.view",
+        "controlId": "appNav",
+        "controlAggregation": "pages",
+        "bypassed": { "target": "launchpad" }
+      },
+      "routes": [
+        { "name": "launchpad",    "pattern": "",              "target": "launchpad"    },
+        { "name": "prlist",       "pattern": "pr-list",       "target": "prlist"       },
+        { "name": "prcreate",     "pattern": "pr-create",     "target": "prcreate"     },
+        { "name": "approval",     "pattern": "pr-approval",   "target": "approval"     },
+        { "name": "polist",       "pattern": "po-list",       "target": "polist"       },
+        { "name": "goodsreceipt", "pattern": "goods-receipt", "target": "goodsreceipt" },
+        { "name": "invoice",      "pattern": "invoice",       "target": "invoice"      }
+      ],
+      "targets": {
+        "launchpad":    { "viewName": "Launchpad",    "viewLevel": 1 },
+        "prlist":       { "viewName": "PRList",       "viewLevel": 2 },
+        "prcreate":     { "viewName": "PRCreate",     "viewLevel": 3 },
+        "approval":     { "viewName": "PRApproval",   "viewLevel": 2 },
+        "polist":       { "viewName": "POList",        "viewLevel": 2 },
+        "goodsreceipt": { "viewName": "GoodsReceipt", "viewLevel": 3 },
+        "invoice":      { "viewName": "Invoice",      "viewLevel": 3 }
+      }
+    }
+  }
+}

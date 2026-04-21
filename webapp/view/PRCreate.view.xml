@@ -1,0 +1,83 @@
+<mvc:View
+  controllerName="fiori.p2p.controller.PRCreate"
+  xmlns:mvc="sap.ui.core.mvc"
+  xmlns="sap.m"
+  xmlns:f="sap.ui.layout.form"
+  xmlns:core="sap.ui.core">
+
+  <Page title="Create Purchase Requisition" showNavButton="true" navButtonPress="onNavBack">
+
+    <content>
+      <VBox class="sapUiMediumMargin">
+
+        <MessageStrip text="Fill in the details below and click Submit to raise a new Purchase Requisition."
+                      type="Information" showIcon="true" class="sapUiSmallMarginBottom" />
+
+        <f:SimpleForm id="prForm" editable="true" layout="ResponsiveGridLayout"
+                      title="Requisition Details"
+                      labelSpanXL="3" labelSpanL="3" labelSpanM="4" labelSpanS="12"
+                      columnsXL="2" columnsL="2" columnsM="1">
+          <f:content>
+            <Label text="Item Description" required="true" />
+            <Input id="itemDesc" placeholder="e.g. Office Chairs" valueLiveUpdate="true" />
+
+            <Label text="Quantity" required="true" />
+            <StepInput id="qty" min="1" max="9999" step="1" value="1" />
+
+            <Label text="Unit of Measure" required="true" />
+            <Select id="uom">
+              <core:Item key="EA"  text="EA – Each" />
+              <core:Item key="KG"  text="KG – Kilogram" />
+              <core:Item key="LTR" text="LTR – Litre" />
+              <core:Item key="BOX" text="BOX – Box" />
+              <core:Item key="SET" text="SET – Set" />
+            </Select>
+
+            <Label text="Plant" required="true" />
+            <Select id="plant">
+              <core:Item key="1000" text="Plant 1000 – Mumbai" />
+              <core:Item key="2000" text="Plant 2000 – Pune" />
+              <core:Item key="3000" text="Plant 3000 – Delhi" />
+            </Select>
+
+            <Label text="Preferred Vendor" />
+            <Select id="vendor">
+              <core:Item key="V1001" text="TechSupply Ltd." />
+              <core:Item key="V1002" text="OfficeGoods Co." />
+              <core:Item key="V1003" text="PrintMart India" />
+              <core:Item key="V1004" text="SafeGear Pvt Ltd" />
+            </Select>
+
+            <Label text="Estimated Amount (INR)" required="true" />
+            <Input id="amount" placeholder="e.g. 15000" type="Number" />
+
+            <Label text="Department" required="true" />
+            <Select id="dept">
+              <core:Item key="IT"   text="IT" />
+              <core:Item key="Admin" text="Admin" />
+              <core:Item key="Ops"  text="Operations" />
+              <core:Item key="WH"   text="Warehouse" />
+              <core:Item key="HR"   text="HR" />
+            </Select>
+
+            <Label text="Required Date" required="true" />
+            <DatePicker id="reqDate" placeholder="YYYY-MM-DD" valueFormat="yyyy-MM-dd"
+                        displayFormat="dd MMM yyyy" />
+
+            <Label text="Remarks" />
+            <TextArea id="remarks" rows="3" placeholder="Additional notes for approver..." />
+          </f:content>
+        </f:SimpleForm>
+
+      </VBox>
+    </content>
+
+    <footer>
+      <Toolbar>
+        <ToolbarSpacer />
+        <Button text="Cancel" type="Default"   press="onCancel" />
+        <Button text="Submit PR" type="Emphasized" icon="sap-icon://paper-plane" press="onSubmit" />
+      </Toolbar>
+    </footer>
+  </Page>
+</mvc:View>

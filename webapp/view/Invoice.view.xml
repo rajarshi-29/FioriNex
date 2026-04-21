@@ -1,0 +1,95 @@
+<mvc:View
+  controllerName="fiori.p2p.controller.Invoice"
+  xmlns:mvc="sap.ui.core.mvc"
+  xmlns="sap.m"
+  xmlns:f="sap.ui.layout.form">
+
+  <Page title="Verify Supplier Invoice" showNavButton="true" navButtonPress="onNavBack">
+
+    <content>
+      <VBox class="sapUiMediumMargin">
+
+        <MessageStrip text="3-way match verification: PO quantity, GR quantity, and Invoice amount must align before payment release."
+                      type="Warning" showIcon="true" class="sapUiSmallMarginBottom" />
+
+        <Table items="{p2p>/Invoices}" noDataText="No invoices pending verification.">
+          <headerToolbar>
+            <Toolbar>
+              <Title text="Pending Invoices" level="H3" />
+            </Toolbar>
+          </headerToolbar>
+          <columns>
+            <Column><Text text="Invoice ID" /></Column>
+            <Column><Text text="PO Ref" /></Column>
+            <Column><Text text="GR Ref" /></Column>
+            <Column><Text text="Vendor" /></Column>
+            <Column><Text text="Item" /></Column>
+            <Column><Text text="Base Amount" /></Column>
+            <Column><Text text="Tax (18%)" /></Column>
+            <Column><Text text="Total Amount" /></Column>
+            <Column><Text text="Invoice Date" /></Column>
+            <Column><Text text="Due Date" /></Column>
+            <Column><Text text="Status" /></Column>
+            <Column><Text text="Action" /></Column>
+          </columns>
+          <items>
+            <ColumnListItem>
+              <cells>
+                <ObjectIdentifier title="{p2p>id}" />
+                <Text text="{p2p>poRef}" />
+                <Text text="{p2p>grRef}" />
+                <Text text="{p2p>vendor}" />
+                <Text text="{p2p>item}" />
+                <ObjectNumber number="{p2p>amount}"      unit="INR" />
+                <ObjectNumber number="{p2p>tax}"         unit="INR" state="Critical" />
+                <ObjectNumber number="{p2p>totalAmount}" unit="INR" state="Success"  />
+                <Text text="{p2p>invoiceDate}" />
+                <Text text="{p2p>dueDate}" />
+                <ObjectStatus
+                  text="{p2p>status}"
+                  state="{= ${p2p>status} === 'Paid' ? 'Success' :
+                            ${p2p>status} === 'Verified' ? 'Information' : 'Warning' }" />
+                <Button text="Verify &amp; Release"
+                        type="Emphasized"
+                        enabled="{= ${p2p>status} === 'Pending' }"
+                        press="onVerifyInvoice" />
+              </cells>
+            </ColumnListItem>
+          </items>
+        </Table>
+
+        <!-- Summary Panel -->
+        <Panel headerText="3-Way Match Summary" expandable="true" expanded="true"
+               class="sapUiMediumMarginTop">
+          <VBox class="sapUiSmallMargin">
+            <HBox justifyContent="SpaceBetween" class="sapUiTinyMarginBottom">
+              <Label text="PO Value:" />
+              <Text text="INR 15,000" />
+            </HBox>
+            <HBox justifyContent="SpaceBetween" class="sapUiTinyMarginBottom">
+              <Label text="GR Value:" />
+              <Text text="INR 15,000" />
+            </HBox>
+            <HBox justifyContent="SpaceBetween" class="sapUiTinyMarginBottom">
+              <Label text="Invoice Value (excl. tax):" />
+              <Text text="INR 15,000" />
+            </HBox>
+            <HBox justifyContent="SpaceBetween">
+              <Label text="Match Status:" />
+              <ObjectStatus text="3-Way Match: PASS" state="Success" />
+            </HBox>
+          </VBox>
+        </Panel>
+
+      </VBox>
+    </content>
+
+    <footer>
+      <Toolbar>
+        <ToolbarSpacer />
+        <Text text="Step 5 of 5: Invoice Verification  |  P2P Cycle Complete" />
+        <Button text="Back to Launchpad" icon="sap-icon://home" type="Emphasized" press="onNavHome" />
+      </Toolbar>
+    </footer>
+  </Page>
+</mvc:View>

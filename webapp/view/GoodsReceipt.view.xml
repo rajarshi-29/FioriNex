@@ -1,0 +1,70 @@
+<mvc:View
+  controllerName="fiori.p2p.controller.GoodsReceipt"
+  xmlns:mvc="sap.ui.core.mvc"
+  xmlns="sap.m"
+  xmlns:f="sap.ui.layout.form"
+  xmlns:core="sap.ui.core">
+
+  <Page title="Post Goods Receipt" showNavButton="true" navButtonPress="onNavBack">
+
+    <content>
+      <VBox class="sapUiMediumMargin">
+
+        <MessageStrip text="Select a PO reference and confirm the quantity received to post a Goods Receipt (Movement Type 101)."
+                      type="Information" showIcon="true" class="sapUiSmallMarginBottom" />
+
+        <Table items="{p2p>/GoodsReceipts}" noDataText="No pending goods receipts.">
+          <headerToolbar>
+            <Toolbar>
+              <Title text="Pending Goods Receipts" level="H3" />
+            </Toolbar>
+          </headerToolbar>
+          <columns>
+            <Column><Text text="GR ID" /></Column>
+            <Column><Text text="PO Reference" /></Column>
+            <Column><Text text="Vendor" /></Column>
+            <Column><Text text="Item" /></Column>
+            <Column><Text text="Qty Ordered" /></Column>
+            <Column><Text text="Qty Received" /></Column>
+            <Column><Text text="Storage Location" /></Column>
+            <Column><Text text="Movement Type" /></Column>
+            <Column><Text text="Status" /></Column>
+            <Column><Text text="Action" /></Column>
+          </columns>
+          <items>
+            <ColumnListItem>
+              <cells>
+                <ObjectIdentifier title="{p2p>id}" />
+                <Text text="{p2p>poRef}" />
+                <Text text="{p2p>vendor}" />
+                <Text text="{p2p>item}" />
+                <Text text="{p2p>qtyOrdered}" />
+                <StepInput value="{p2p>qtyReceived}" min="0" max="{p2p>qtyOrdered}" step="1" />
+                <Text text="{p2p>storageLocation}" />
+                <Text text="{p2p>movementType}" />
+                <ObjectStatus
+                  text="{p2p>status}"
+                  state="{= ${p2p>status} === 'Posted' ? 'Success' : 'Warning' }" />
+                <Button text="Post GR" type="Emphasized"
+                        enabled="{= ${p2p>status} !== 'Posted' }"
+                        press="onPostGR"
+                        customData:key="{p2p>id}"
+                        xmlns:customData="sap.ui.core"
+                        />
+              </cells>
+            </ColumnListItem>
+          </items>
+        </Table>
+
+      </VBox>
+    </content>
+
+    <footer>
+      <Toolbar>
+        <ToolbarSpacer />
+        <Text text="Step 4 of 5: Goods Receipt  |  Next: Invoice Verification" />
+        <Button text="Go to Invoice" icon="sap-icon://request" press="onNavToInvoice" />
+      </Toolbar>
+    </footer>
+  </Page>
+</mvc:View>

@@ -1,0 +1,57 @@
+<mvc:View
+  controllerName="fiori.p2p.controller.PRApproval"
+  xmlns:mvc="sap.ui.core.mvc"
+  xmlns="sap.m">
+
+  <Page title="Approve Purchase Orders" showNavButton="true" navButtonPress="onNavBack">
+
+    <subHeader>
+      <Toolbar>
+        <Text text="Pending PRs requiring your approval" />
+        <ToolbarSpacer />
+        <Button text="Approve All" icon="sap-icon://accept" type="Accept" press="onApproveAll" />
+      </Toolbar>
+    </subHeader>
+
+    <content>
+      <List id="approvalList"
+            items="{p2p>/PurchaseRequisitions}"
+            noDataText="No pending approvals."
+            mode="None">
+        <items>
+          <ObjectListItem
+            title="{p2p>id} – {p2p>item}"
+            number="{p2p>amount}"
+            numberUnit="INR"
+            type="Active"
+            press="onItemPress">
+            <attributes>
+              <ObjectAttribute text="Qty: {p2p>qty} {p2p>unit}" />
+              <ObjectAttribute text="Plant: {p2p>plant}" />
+              <ObjectAttribute text="Vendor: {p2p>vendor}" />
+              <ObjectAttribute text="Requestor: {p2p>requestor}" />
+              <ObjectAttribute text="Date: {p2p>date}" />
+            </attributes>
+            <firstStatus>
+              <ObjectStatus
+                text="{p2p>status}"
+                state="{= ${p2p>status} === 'Approved' ? 'Success' :
+                          ${p2p>status} === 'Rejected' ? 'Error' : 'Warning' }" />
+            </firstStatus>
+            <secondStatus>
+              <ObjectStatus text="Dept: {p2p>department}" state="Information" />
+            </secondStatus>
+          </ObjectListItem>
+        </items>
+      </List>
+    </content>
+
+    <footer>
+      <Toolbar>
+        <ToolbarSpacer />
+        <Text text="Step 2 of 5: PR Approval  |  Next: Purchase Order" />
+        <Button text="Go to PO List" icon="sap-icon://cart" press="onNavToPO" />
+      </Toolbar>
+    </footer>
+  </Page>
+</mvc:View>
