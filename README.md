@@ -6,9 +6,7 @@
 
 ## Live Demo
 
-**[View Live Prototype](https://YOUR_USERNAME.github.io/sap-fiori-p2p-prototype)**
-
-> Replace `YOUR_USERNAME` with your GitHub username after deployment.
+**[View Live Prototype](https://rajarshi-29.github.io/FioriNex/)**
 
 ---
 
@@ -124,15 +122,6 @@ python -m http.server 8080
 ```bash
 npx serve .
 ```
-
----
-
-## Deployment (GitHub Pages)
-
-1. Push code to the `main` branch
-2. Go to **Settings → Pages → Source → Deploy from branch → main → / (root)**
-3. GitHub Actions will auto-deploy on every push via `.github/workflows/deploy.yml`
-4. Your live URL: `https://YOUR_USERNAME.github.io/sap-fiori-p2p-prototype`
 
 ---
 
